@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bildad Mwangi — Web Developer & Digital Growth Expert | Nairobi, Kenya</title>
+<meta name="description" content="Bildad Mwangi — CS student at Kenyatta University building real products for Kenyan businesses. M-Pesa integration, websites, WhatsApp bots & social media management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;--bg2:#F0F4FF;--bg3:#E8EDF8;--surface:#F8FAFF;
+  --border:rgba(27,47,110,.08);--border2:rgba(27,47,110,.16);
+  --text:#0D1325;--muted:#4A5578;--dim:#9BA3BC;
+  --gold:#C9932A;--navy:#1B2F6E;--white:#FFFFFF;
+  --blue:#1B2F6E;--teal:#C9932A;--rose:#1B2F6E;--violet:#1B2F6E;
+  --font-d:'Space Grotesk',sans-serif;--font-b:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* CURSOR */
+.cur{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+.cur.big{width:44px;height:44px;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.4)}
+.cur-trail{width:36px;height:36px;border:1px solid rgba(232,160,32,.3);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 56px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
+nav.scrolled{background:rgba(3,6,15,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-text{font-family:var(--font-d);font-weight:700;font-size:20px;color:var(--text);letter-spacing:-.5px}
+.nav-logo-text em{font-style:normal;color:var(--gold)}
+.nav-logo-badge{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;border:1px solid var(--border2);border-radius:100px;padding:2px 8px;margin-left:2px}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+.nav-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;letter-spacing:.3px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--gold)!important;color:#03060F!important;padding:10px 24px!important;border-radius:100px!important;font-weight:700!important;font-size:13px!important;letter-spacing:.3px!important;transition:all .25s!important}
+.nav-cta:hover{transform:translateY(-2px)!important;box-shadow:0 8px 32px rgba(232,160,32,.35)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:24px;height:1.5px;background:var(--text);transition:all .3s;display:block}
+.mobile-nav{position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transform:translateX(100%);transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav a{font-family:var(--font-d);font-size:36px;font-weight:700;color:var(--text);text-decoration:none;transition:color .2s}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;padding:140px 56px 100px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 55% 45% at 75% 35%,rgba(46,134,222,.08) 0%,transparent 65%),
+  radial-gradient(ellipse 35% 50% at 15% 65%,rgba(232,160,32,.06) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 40% at 90% 80%,rgba(46,134,222,.06) 0%,transparent 60%);
+  pointer-events:none}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.hero-diagonal{display:none}
+.hero-photo-large{display:none}
+.hero-split{display:none}
+.hero-main{min-height:100vh;display:grid;grid-template-columns:1fr 400px;align-items:center;gap:0;padding:0 0 0 80px;position:relative;z-index:2}
+.hero-main-left{padding:120px 60px 80px 0}
+.hero-main-right{height:100vh;background:var(--navy);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.hero-main-right::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom,rgba(27,47,110,.15) 0%,rgba(27,47,110,.5) 60%,rgba(27,47,110,.95) 100%);z-index:1}
+.hero-main-right::after{content:'BILDAD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-d);font-size:120px;font-weight:700;color:rgba(255,255,255,.04);letter-spacing:-4px;white-space:nowrap;z-index:0;pointer-events:none}
+.hero-avatar{width:100%;height:100%;position:absolute;top:0;left:0;z-index:0}
+.hero-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.hero-avatar-tag{position:absolute;bottom:40px;left:24px;right:24px;z-index:2;background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border:1px solid rgba(201,147,42,.3);border-radius:16px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.hero-avatar-tag-left{font-family:var(--font-d);font-size:15px;font-weight:700;color:#fff}
+.hero-avatar-tag-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+.hero-avatar-tag-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0}
+@media(max-width:900px){
+  .hero-main{grid-template-columns:1fr;padding:0;min-height:auto}
+  .hero-main-right{height:380px;width:100%}
+  .hero-main-left{padding:40px 24px 40px;order:2}
+  .hero-main-right{order:1}
+}
+.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;opacity:0;animation:fadeUp .8s .1s ease forwards}
+.hero-eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:breathe 2.5s ease infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 8px var(--gold)}50%{box-shadow:0 0 20px var(--gold),0 0 40px rgba(232,160,32,.25)}}
+.hero-eyebrow-text{font-size:12px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+
+.hero-brand{margin-bottom:28px;opacity:0;animation:fadeUp .8s .15s ease forwards}
+.hero-brand-name{font-family:var(--font-d);font-size:clamp(48px,7vw,90px);font-weight:700;line-height:.95;letter-spacing:-3px;margin-bottom:6px}
+.hero-brand-name .v1-word1{color:var(--text)}
+.hero-brand-name .v1-word2{font-weight:700;color:var(--gold)}
+.hero-brand-tagline{font-size:13px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
+.hero-brand-tagline span{color:var(--gold);font-size:8px}
+
+.hero-founder{display:flex;align-items:center;gap:16px;margin-bottom:28px;opacity:0;animation:fadeUp .8s .2s ease forwards;padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;display:inline-flex}
+.hero-photo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid rgba(232,160,32,.4);flex-shrink:0}
+.hero-founder-text{font-size:12px;color:var(--muted)}
+.hero-founder-text strong{color:var(--text);font-weight:600;display:block;font-size:13px}
+
+.hero-sub{font-size:17px;line-height:1.85;color:var(--muted);max-width:520px;margin-bottom:44px;font-weight:300;opacity:0;animation:fadeUp .8s .3s ease forwards}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .4s ease forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#03060F;padding:15px 32px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.2px;transition:all .3s}
+.btn-primary:hover{background:var(--blue);transform:translateY(-3px);box-shadow:0 12px 40px rgba(232,160,32,.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;color:var(--text);padding:15px 32px;border-radius:100px;font-size:14px;font-weight:400;text-decoration:none;border:1px solid var(--border2);transition:all .3s}
+.btn-outline:hover{border-color:var(--gold);background:rgba(255,255,255,.03);transform:translateY(-3px)}
+
+/* Hero floats */
+.hero-floats{position:absolute;right:56px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;opacity:0;animation:fadeUp .8s .7s ease forwards}
+.hf{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:18px;padding:14px 20px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(16px);transition:all .3s;white-space:nowrap}
+.hf:hover{background:rgba(255,255,255,.06);border-color:rgba(232,160,32,.25);transform:translateX(-6px)}
+.hf-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hf-a .hf-ic{background:rgba(232,160,32,.12);color:var(--gold)}
+.hf-b .hf-ic{background:rgba(46,134,222,.12);color:var(--blue)}
+.hf-c .hf-ic{background:rgba(232,160,32,.12);color:var(--gold)}
+.hf-d .hf-ic{background:rgba(46,134,222,.12);color:var(--blue)}
+.hf-title{font-size:13px;font-weight:500;color:var(--text)}
+.hf-sub{font-size:11px;color:var(--muted);margin-top:1px}
+
+/* NOW STRIP */
+.now-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 56px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.now-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);flex-shrink:0}
+.now-items{display:flex;gap:10px;flex-wrap:wrap}
+.now-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:12px;color:var(--muted);transition:all .2s}
+.now-item:hover{border-color:var(--gold);color:var(--text)}
+.now-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nd-g{background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.nd-y{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.nd-v{background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.nd-o{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+
+/* TICKER */
+.ticker{overflow:hidden;padding:14px 0;border-bottom:1px solid var(--border);background:var(--bg)}
+.ticker-track{display:flex;animation:tick 30s linear infinite;white-space:nowrap}
+.ticker-track:hover{animation-play-state:paused}
+.ti{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:0 28px;transition:color .2s}
+.ti:hover{color:var(--gold)}
+.ti-sep{color:var(--gold);opacity:.5;font-size:8px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:120px 56px}
+.sec-alt{background:var(--bg2)}
+.sec-dark{background:var(--bg3)}
+.label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:56px}
+.label::before{content:'';width:32px;height:1px;background:var(--gold);opacity:.4}
+.h2{font-family:var(--font-d);font-size:clamp(38px,5vw,62px);font-weight:700;line-height:1.0;letter-spacing:-2px}
+.h2 em{font-style:normal;font-weight:700;color:var(--gold)}
+.sec-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:64px}
+.sec-intro p{font-size:15px;line-height:1.85;color:var(--muted);font-weight:300}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:20px;overflow:hidden;margin-bottom:80px}
+.stat-box{background:var(--bg2);padding:36px 32px;text-align:center;transition:background .3s}
+.stat-box:hover{background:var(--bg3)}
+.stat-num{font-family:var(--font-d);font-size:48px;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:12px;color:var(--muted);margin-top:8px;font-weight:300;letter-spacing:.5px}
+
+/* SERVICES */
+.svc-grid-new{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc-new{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.23,1,.32,1);position:relative}
+.svc-new:hover{border-color:rgba(232,160,32,.25);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.svc-new:hover .svc-vis-inner{transform:scale(1.04)}
+.svc-vis{height:180px;overflow:hidden;position:relative;flex-shrink:0}
+.svc-vis-inner{width:100%;height:100%;transition:transform .5s ease;position:relative}
+
+.mpesa-mock{background:linear-gradient(160deg,#003d00 0%,#006600 50%,#004d00 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+.mpesa-phone{width:90px;background:#1a1a1a;border-radius:16px;padding:8px;border:2px solid #333;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.mpesa-screen{background:#000;border-radius:10px;overflow:hidden}
+.mpesa-header{background:#4caf50;padding:6px 8px;text-align:center}
+.mpesa-header-txt{color:#fff;font-size:7px;font-weight:700;letter-spacing:1px}
+.mpesa-body{padding:6px 8px}
+.mpesa-row{display:flex;justify-content:space-between;margin-bottom:3px}
+.mpesa-key{background:#222;border-radius:3px;padding:3px 5px;font-size:6px;color:#888}
+.mpesa-amount{font-size:9px;color:#4caf50;font-weight:700;text-align:center;padding:4px 0;border-top:1px solid #222;margin-top:4px}
+.mpesa-btn{background:#4caf50;border-radius:4px;padding:4px;text-align:center;font-size:6px;color:#fff;font-weight:700;margin-top:4px}
+
+.ecom-mock{background:linear-gradient(160deg,#09102A 0%,#0D1535 50%,#09102A 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:16px;gap:8px}
+.ecom-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px;width:56px;flex-shrink:0}
+.ecom-img{background:rgba(232,160,32,.2);border-radius:6px;height:36px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ecom-bar{height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin-bottom:3px}
+.ecom-bar.short{width:60%}
+.ecom-price{font-size:7px;color:var(--gold);font-weight:700;margin-top:4px}
+.ecom-add{background:rgba(232,160,32,.2);border-radius:4px;padding:3px;font-size:5px;color:var(--gold);text-align:center;margin-top:4px;font-weight:700}
+
+.bizsite-mock{background:linear-gradient(160deg,#001a33 0%,#003366 50%,#001a4d 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:16px}
+.browser-mock{background:#1a1a2e;border-radius:10px;overflow:hidden;width:150px;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.browser-bar{background:#0d0d1a;padding:6px 8px;display:flex;align-items:center;gap:4px}
+.b-dot{width:5px;height:5px;border-radius:50%}
+.b-dot-r{background:#ff5f57}.b-dot-y{background:#febc2e}.b-dot-g{background:#28c840}
+.b-url{background:#1a1a2e;border-radius:3px;flex:1;margin-left:4px;padding:2px 6px;font-size:6px;color:#4a6080}
+.browser-hero{background:linear-gradient(135deg,rgba(232,160,32,.15),rgba(46,134,222,.15));padding:12px 10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.bh-title{font-size:8px;font-weight:700;color:#fff;margin-bottom:4px}
+.bh-sub{font-size:6px;color:rgba(255,255,255,.5);line-height:1.4;margin-bottom:6px}
+.bh-btn{background:var(--gold);border-radius:3px;padding:3px 8px;font-size:6px;color:#03060F;font-weight:700;display:inline-block}
+.browser-body{padding:8px 10px;display:flex;gap:8px}
+.bb-col{flex:1}
+.bb-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:3px}
+
+.social-mock{background:linear-gradient(160deg,#09102A 0%,#0D1535 50%,#09102A 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:16px;gap:8px}
+.ig-post{background:#1a1a2e;border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;width:68px}
+.ig-img{height:68px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.ig-meta{padding:6px}
+.ig-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:3px}
+.ig-likes{font-size:6px;color:var(--blue);font-weight:700;margin-top:4px}
+
+.auto-mock{background:linear-gradient(160deg,#09102A 0%,#0D1535 50%,#09102A 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+.flow-diagram{display:flex;flex-direction:column;gap:4px;align-items:center}
+.flow-node{background:rgba(46,134,222,.12);border:1px solid rgba(46,134,222,.3);border-radius:8px;padding:5px 10px;font-size:7px;color:rgba(46,134,222,.8);font-weight:600;letter-spacing:.5px;white-space:nowrap}
+.flow-node.active{background:rgba(232,160,32,.12);border-color:rgba(232,160,32,.3);color:var(--gold)}
+.flow-arrow{color:rgba(46,134,222,.4);font-size:10px;line-height:1}
+
+.fb-mock{background:linear-gradient(160deg,#09102A 0%,#0D1535 50%,#09102A 100%);height:100%;display:flex;align-items:center;justify-content:center;padding:16px}
+.db-panel{background:rgba(0,0,0,.4);border:1px solid rgba(232,160,32,.2);border-radius:10px;padding:10px 12px;width:160px}
+.db-header{display:flex;align-items:center;gap:6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05)}
+.db-icon{font-size:10px}
+.db-title{font-size:8px;color:var(--gold);font-weight:700;letter-spacing:1px}
+.db-row{display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.db-key{font-size:7px;color:var(--blue);font-weight:500;flex:1}
+.db-val{font-size:7px;color:#a5d6a7;flex:1;text-align:right}
+.db-type{font-size:6px;color:#555;margin-left:4px}
+
+.svc-body{padding:24px 28px}
+.svc-num-new{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--dim);margin-bottom:14px;display:block}
+.svc-title-new{font-family:var(--font-d);font-size:19px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-.2px}
+.svc-desc-new{font-size:13px;line-height:1.75;color:var(--muted);font-weight:300;margin-bottom:18px}
+.svc-tags-new{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.stag{font-size:10px;font-weight:600;letter-spacing:.3px;padding:3px 9px;border-radius:100px;border:1px solid var(--border2);color:var(--dim);transition:all .3s}
+.svc-new:hover .stag{border-color:rgba(232,160,32,.2);color:rgba(232,160,32,.7)}
+.svc-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--gold);text-decoration:none;transition:gap .2s,color .2s}
+.svc-link:hover{gap:12px;color:var(--blue)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.23,1,.32,1)}
+.proj-card:hover{border-color:rgba(232,160,32,.25);transform:translateY(-8px);box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 40px rgba(232,160,32,.06)}
+.proj-card.big{grid-column:span 2;display:grid;grid-template-columns:1.1fr .9fr}
+.proj-vis{position:relative;overflow:hidden}
+.proj-card.big .proj-vis{min-height:300px}
+.proj-card:not(.big) .proj-vis{height:220px}
+.proj-vis img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s ease;display:block}
+.proj-card:hover .proj-vis img{transform:scale(1.05)}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(3,6,15,.8));pointer-events:none}
+
+.proj-vis-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px}
+.mnuc-placeholder{background:linear-gradient(135deg,#0A1628 0%,#1B2A4A 50%,#0A1628 100%)}
+.devote-placeholder{background:linear-gradient(135deg,#09102A 0%,#0D1535 50%,#09102A 100%)}
+.rukwaro-placeholder{background:linear-gradient(135deg,#0A1628 0%,#1E56A0 50%,#0A1628 100%)}
+.forex-placeholder{background:linear-gradient(135deg,#09102A 0%,#2E86DE 50%,#09102A 100%)}
+.wabot-placeholder{background:linear-gradient(135deg,#003d00 0%,#006600 50%,#003d00 100%)}
+
+.proj-body{padding:28px}
+.proj-tags-new{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.ptag{font-size:9px;font-weight:700;letter-spacing:.5px;padding:3px 9px;border-radius:100px;background:rgba(232,160,32,.08);color:rgba(232,160,32,.8);border:1px solid rgba(232,160,32,.15)}
+.ptag.live{background:rgba(46,134,222,.08);color:rgba(46,134,222,.8);border-color:rgba(46,134,222,.15)}
+.proj-title{font-family:var(--font-d);font-size:21px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.3px}
+.proj-desc{font-size:13px;line-height:1.78;color:var(--muted);font-weight:300;margin-bottom:20px}
+.proj-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--gold);text-decoration:none;transition:gap .25s,color .25s}
+.proj-link:hover{gap:14px;color:var(--blue)}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px}
+.proc-card{padding:32px 28px;border:1px solid var(--border);border-radius:20px;background:var(--surface);position:relative;transition:all .3s}
+.proc-card:hover{border-color:rgba(232,160,32,.2);transform:translateY(-4px)}
+.proc-card::after{content:'→';position:absolute;right:-26px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--dim)}
+.proc-card:last-child::after{display:none}
+.proc-num{font-family:var(--font-d);font-size:56px;font-weight:700;color:rgba(232,160,32,.08);line-height:1;margin-bottom:16px}
+.proc-icon{font-size:22px;margin-bottom:14px;display:block}
+.proc-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.proc-desc{font-size:13px;line-height:1.75;color:var(--muted);font-weight:300}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tool{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px 18px;text-align:center;transition:all .35s}
+.tool:hover{border-color:rgba(232,160,32,.3);transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.tool:hover .tool-icon-wrap{transform:scale(1.2) rotate(-8deg)}
+.tool-icon-wrap{font-size:28px;margin-bottom:10px;display:block;transition:transform .35s}
+.tool-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.tool-type{font-size:10px;color:var(--dim)}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:60px}
+.why-card{padding:32px;border:1px solid var(--border);border-radius:20px;background:var(--surface);transition:all .3s;position:relative;overflow:hidden}
+.why-card:hover{border-color:rgba(232,160,32,.2);transform:translateY(-4px)}
+.why-n{font-family:var(--font-d);font-size:56px;font-weight:700;color:rgba(232,160,32,.08);line-height:1;margin-bottom:14px}
+.why-title{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.why-desc{font-size:13px;line-height:1.8;color:var(--muted);font-weight:300}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-left p{font-size:15px;line-height:1.9;color:var(--muted);font-weight:300;margin:24px 0 40px}
+.contact-methods{display:flex;flex-direction:column;gap:10px}
+.cm{display:flex;align-items:center;gap:14px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:400;padding:14px 18px;border:1px solid var(--border);border-radius:14px;transition:all .3s}
+.cm:hover{color:var(--text);border-color:rgba(232,160,32,.3);background:rgba(232,160,32,.03);transform:translateX(6px)}
+.cm-icon{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);flex-shrink:0;transition:background .3s}
+.cm:hover .cm-icon{background:rgba(232,160,32,.12)}
+.plat-panel{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:32px}
+.plat-panel h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:20px}
+.plat-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:8px;text-decoration:none;transition:all .3s;background:rgba(255,255,255,.01)}
+.plat-item:last-child{margin-bottom:0}
+.plat-item:hover{background:rgba(255,255,255,.04);border-color:rgba(232,160,32,.25);transform:translateX(4px)}
+.plat-l{display:flex;align-items:center;gap:12px}
+.plat-l svg{color:var(--gold);width:16px;height:16px;flex-shrink:0}
+.plat-name{font-size:13px;font-weight:600;color:var(--text)}
+.plat-sub{font-size:10px;color:var(--dim);margin-top:1px}
+.plat-arr{font-size:10px;color:var(--dim);transition:transform .3s,color .3s}
+.plat-item:hover .plat-arr{transform:translateX(4px);color:var(--gold)}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(232,160,32,.08) 0%,rgba(46,134,222,.06) 100%);border-top:1px solid rgba(232,160,32,.1);border-bottom:1px solid rgba(232,160,32,.1);padding:80px 56px;text-align:center}
+.cta-band h2{font-family:var(--font-d);font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.0;letter-spacing:-2px;margin-bottom:16px}
+.cta-band p{font-size:16px;color:var(--muted);font-weight:300;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* FOOTER */
+footer{background:var(--bg);padding:28px 56px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+footer p{font-size:12px;color:var(--dim);font-weight:300}
+footer a{color:var(--gold);text-decoration:none}
+.foot-soc{display:flex;gap:20px}
+.foot-soc a{color:var(--dim);font-size:15px;transition:color .2s,transform .2s;display:flex;align-items:center}
+.foot-soc a:hover{color:var(--gold);transform:translateY(-2px)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.reveal.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.hero-floats{display:none}}
+@media(max-width:860px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero,.sec,.now-strip{padding-left:24px;padding-right:24px}
+  .cta-band{padding-left:24px;padding-right:24px}
+  .hero-brand-name{font-size:52px;letter-spacing:-2px}
+  .stats-row,.sec-intro,.proj-grid,.contact-wrap,.why-grid,.process-grid{grid-template-columns:1fr;gap:24px}
+  .proj-card.big{grid-column:span 1;display:block}
+  .svc-grid-new,.tools-grid{grid-template-columns:1fr 1fr}
+  .proc-card::after{display:none}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:24px}
+}
+@media(max-width:520px){
+  .svc-grid-new,.tools-grid{grid-template-columns:1fr}
+}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(13,19,37,.95);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox-inner{position:relative;max-width:90vw;max-height:90vh}
+.lightbox-inner img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:12px;box-shadow:0 40px 100px rgba(0,0,0,.6);display:block}
+.lightbox-close{position:absolute;top:-40px;right:0;font-size:28px;color:#fff;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s;background:none;border:none;font-family:var(--font-b)}
+.lightbox-close:hover{opacity:1}
+.lightbox-caption{text-align:center;color:rgba(255,255,255,.5);font-size:12px;margin-top:12px;letter-spacing:.5px}
+.proj-vis{cursor:zoom-in}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-trail" id="curT"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#work" onclick="closeMob()">Work</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="https://wa.me/254716356483?text=Hi%20Bildad%2C%20I%20found%20your%20portfolio%20and%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." style="color:var(--gold)">Hire Me ↗</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-text">Bildad<em>.</em></div>
+    <span class="nav-logo-badge">Available</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://wa.me/254716356483?text=Hi%20Bildad%2C%20I%20found%20your%20portfolio%20and%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." class="nav-cta">Hire Me ↗</a></li>
+  </ul>
+  <div class="hamburger" id="ham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style="padding:0;min-height:100vh;display:block">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-main">
+    <div class="hero-main-left">
+      <div class="hero-eyebrow" style="margin-bottom:28px">
+        <div class="hero-eyebrow-dot"></div>
+        <span class="hero-eyebrow-text">Available for projects — Nairobi, Kenya · Remote worldwide</span>
+      </div>
+      <div class="hero-brand" style="margin-bottom:24px">
+        <p style="font-size:16px;font-weight:400;color:var(--muted);margin-bottom:16px;line-height:1.6">Need more customers? <strong style="color:var(--navy)">Your business deserves to be found online.</strong></p>
+        <div class="hero-brand-name" style="font-size:clamp(44px,5.5vw,76px);line-height:.95;letter-spacing:-2px;white-space:nowrap">
+          <span class="v1-word1">Bildad</span> <span class="v1-word2">Mwangi.</span>
+        </div>
+        <div class="hero-brand-tagline" style="margin-top:20px">
+          Web Developer <span>◆</span> Digital Growth Expert <span>◆</span> Nairobi
+        </div>
+      </div>
+      <div class="hero-founder" style="margin-bottom:28px;display:inline-flex">
+        <div class="hero-founder-text">
+          <strong>BSc Computer Science · Kenyatta University</strong>
+          Building real products for real Kenyan businesses since 2024. Shipped under JBEE Creations · Now founding <em style="color:var(--gold);font-style:normal;font-weight:700">Vector One</em>.
+        </div>
+      </div>
+      <p class="hero-sub">
+        I build <strong>websites, e-commerce platforms</strong> and AI-powered WhatsApp bots that help Kenyan businesses get found, get customers, and get paid.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View My Work</a>
+        <a href="https://wa.me/254716356483?text=Hi%20Bildad%2C%20I%20found%20your%20portfolio%20and%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." class="btn-outline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp Me</a>
+      </div>
+      <div style="display:flex;gap:40px;margin-top:48px;padding-top:40px;border-top:1px solid var(--border)">
+        <div>
+          <div style="font-family:var(--font-d);font-size:32px;font-weight:700;color:var(--navy);line-height:1">5+</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;font-weight:400">Live projects</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-d);font-size:32px;font-weight:700;color:var(--navy);line-height:1">3+</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;font-weight:400">Paying clients</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-d);font-size:32px;font-weight:700;color:var(--navy);line-height:1">24h</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;font-weight:400">Response time</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-main-right">
+      <div class="hero-avatar">
+        <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1774187435/WhatsApp_Image_2026-03-22_at_16.38.53_krrfia.jpg" alt="Bildad Mwangi">
+      </div>
+      <div class="hero-avatar-tag">
+        <div>
+          <div class="hero-avatar-tag-left">Bildad Mwangi</div>
+          <div class="hero-avatar-tag-sub">Web Developer · Nairobi, Kenya</div>
+        </div>
+        <div class="hero-avatar-tag-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOW STRIP -->
+<div class="now-strip">
+  <span class="now-label">Currently</span>
+  <div class="now-items">
+    <div class="now-item"><span class="now-dot nd-g"></span>Live: MNUC Market — mnucmarketplace.me</div>
+    <div class="now-item"><span class="now-dot nd-g"></span>Live: MFS Muriru Hardware — mfsshardwarestore.netlify.app</div>
+    <div class="now-item"><span class="now-dot nd-y"></span>Delivered: Rukwaro Autospares — Brand + Bot</div>
+    <div class="now-item"><span class="now-dot nd-o"></span>Founding: Vector One — Research Phase</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ti">M-Pesa Integration</span><span class="ti-sep">◆</span>
+    <span class="ti">Web Development</span><span class="ti-sep">◆</span>
+    <span class="ti">Supabase Backend</span><span class="ti-sep">◆</span>
+    <span class="ti">E-Commerce Kenya</span><span class="ti-sep">◆</span>
+    <span class="ti">Daraja API</span><span class="ti-sep">◆</span>
+    <span class="ti">AI Automation</span><span class="ti-sep">◆</span>
+    <span class="ti">Social Media Mgmt</span><span class="ti-sep">◆</span>
+    <span class="ti">Vector One</span><span class="ti-sep">◆</span>
+    <span class="ti">WhatsApp Bots</span><span class="ti-sep">◆</span>
+    <span class="ti">Content Creation</span><span class="ti-sep">◆</span>
+    <span class="ti">M-Pesa Integration</span><span class="ti-sep">◆</span>
+    <span class="ti">Web Development</span><span class="ti-sep">◆</span>
+    <span class="ti">Supabase Backend</span><span class="ti-sep">◆</span>
+    <span class="ti">E-Commerce Kenya</span><span class="ti-sep">◆</span>
+    <span class="ti">Daraja API</span><span class="ti-sep">◆</span>
+    <span class="ti">AI Automation</span><span class="ti-sep">◆</span>
+    <span class="ti">Social Media Mgmt</span><span class="ti-sep">◆</span>
+    <span class="ti">Vector One</span><span class="ti-sep">◆</span>
+    <span class="ti">WhatsApp Bots</span><span class="ti-sep">◆</span>
+    <span class="ti">Content Creation</span><span class="ti-sep">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="label">About Me</div>
+  <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:start" class="reveal">
+    <div>
+      <h2 class="h2" style="margin-bottom:32px">I help Kenyan businesses<br><em>grow online.</em></h2>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);font-weight:300;margin-bottom:18px">I'm <strong style="color:var(--text);font-weight:600">Bildad Mwangi</strong> — a Computer Science student at Kenyatta University who didn't wait to graduate before building real things. Since 2024 I've shipped live products for paying Kenyan clients across web development, branding, and automation.</p>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);font-weight:300;margin-bottom:18px">I specialise in <strong style="color:var(--text);font-weight:500">building websites, e-commerce platforms, and digital tools</strong> that help Kenyan businesses get found, get customers, and get paid. Every project I deliver is mobile-friendly, fast, and built for the Kenyan market — including M-Pesa payment integration.</p>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);font-weight:300;margin-bottom:18px">My CS coursework at KU covers databases, algorithms, networking, and software engineering. My clients gave me the real-world pressure to apply it fast and get it right.</p>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);font-weight:300;margin-bottom:32px">I'm now founding <strong style="color:var(--gold);font-weight:600">Vector One</strong> — a technology company focused on solving real problems using AI. Currently in research phase, identifying the right problems worth building for. The products come next.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);color:var(--muted)">BSc Computer Science · KU</span>
+        <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);color:var(--muted)">M-Pesa Specialist</span>
+        <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);color:var(--muted)">Supabase · Firebase</span>
+        <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);color:var(--muted)">Nairobi · Remote</span>
+        <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);color:var(--muted)">Fiverr Seller</span>
+      </div>
+      <div style="margin-top:32px;border-radius:16px;overflow:hidden;border:1px solid var(--border2);position:relative">
+        <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1774189717/firestore_eetsrg.jpg" alt="Firebase Firestore live database" style="width:100%;display:block;opacity:.8;transition:opacity .3s">
+        <div style="position:absolute;inset:0;background:linear-gradient(transparent,rgba(3,6,15,.85));pointer-events:none"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:14px 18px;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase">Production Database — Live Kenyan Customers</div>
+      </div>
+    </div>
+    <div>
+      <div style="background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:32px;margin-bottom:16px">
+        <h3 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:24px;letter-spacing:-.2px">Core Skills</h3>
+        <div id="skillsPanel">
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">JavaScript</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="85" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">M-Pesa Daraja API</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="90" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .1s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">Supabase · Firebase</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="85" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .2s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">HTML & CSS</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="92" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .3s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">Python & Automation</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="78" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .4s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;color:var(--text);font-weight:400">Social Media Mgmt</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="88" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .5s cubic-bezier(.23,1,.32,1)"></div></div></div>
+          <div class="sk-row" style="display:flex;align-items:center;justify-content:space-between;padding:11px 0"><span style="font-size:13px;color:var(--text);font-weight:400">AI & Automation</span><div style="width:90px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div class="sk-fill" data-w="82" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .6s cubic-bezier(.23,1,.32,1)"></div></div></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center">
+          <div class="counter" data-target="5" style="font-family:var(--font-d);font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">5+</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:300">Live projects</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center">
+          <div class="counter" data-target="10" style="font-family:var(--font-d);font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">10+</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:300">Skills mastered</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center">
+          <div style="font-family:var(--font-d);font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">24H</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:300">Response time</div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center">
+          <div style="font-family:var(--font-d);font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">KE</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:300">Based in Kenya</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec sec-alt" id="services">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">What I Do</div>
+      <h2 class="h2">Services I deliver<br><em>right now.</em></h2>
+    </div>
+    <p>Every service comes with direct communication, clean code, and on-time delivery. No agencies. No middlemen. You work directly with me. WhatsApp me for a custom quote.</p>
+  </div>
+
+  <div class="stats-row reveal">
+    <div class="stat-box">
+      <div class="stat-num counter" data-target="5">5+</div>
+      <div class="stat-label">Live Projects</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">24H</div>
+      <div class="stat-label">Response Time</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num counter" data-target="15">15+</div>
+      <div class="stat-label">Technologies</div>
+    </div>
+  </div>
+
+  <div class="svc-grid-new reveal">
+
+<!-- M-Pesa -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="mpesa-mock">
+    <div class="mpesa-phone"><div class="mpesa-screen">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:3px 6px"><span style="font-size:5px;color:#777">09:41</span><span style="display:flex;align-items:center;gap:3px"><svg width="5" height="5" viewBox="0 0 24 24" fill="#777"><path d="M2 20h3v-6H2v6zm5 0h3V10H7v10zm5 0h3V5h-3v15zm5 0h3v-8h-3v8z"/></svg><svg width="9" height="5" viewBox="0 0 30 14" fill="none"><rect x="1" y="1" width="23" height="12" rx="3" stroke="#777" stroke-width="1.6"/><rect x="3.2" y="3.2" width="15" height="7.6" rx="1.5" fill="#4caf50"/><path d="M26.5 5v4c1.4-.5 2.2-1.2 2.2-2s-.8-1.5-2.2-2z" fill="#777"/></svg></span></div><div class="mpesa-header"><div class="mpesa-header-txt">M-PESA</div></div>
+      <div class="mpesa-body">
+        <div class="mpesa-row"><span class="mpesa-key">To</span><span style="font-size:6px;color:#aaa">Vector One</span></div>
+        <div class="mpesa-row"><span class="mpesa-key">Ref</span><span style="font-size:6px;color:#aaa">ORDER_001</span></div>
+        <div class="mpesa-amount">KSh 2,500.00 — Enter M-PESA PIN</div>
+        <div style="display:flex;gap:4px;margin-top:4px"><div class="mpesa-btn" style="flex:1">1. OK</div><div style="flex:1;background:#222;border-radius:4px;padding:4px;text-align:center;font-size:6px;color:#888;font-weight:700">2. CANCEL</div></div>
+      </div>
+    </div></div>
+    <div style="margin-left:12px;flex:1">
+      <div style="font-size:9px;font-weight:700;color:#4caf50;letter-spacing:1px;margin-bottom:6px">STK PUSH</div>
+      <div style="font-size:7px;color:rgba(255,255,255,.5);line-height:1.6">Customer receives<br>payment prompt<br>on their phone</div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px">
+        <div style="font-size:6px;color:#4caf50;display:flex;align-items:center;gap:4px"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Sandbox ready</div>
+        <div style="font-size:6px;color:#4caf50;display:flex;align-items:center;gap:4px"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Live enabled</div>
+        <div style="font-size:6px;color:#4caf50;display:flex;align-items:center;gap:4px"><svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Callback active</div>
+      </div>
+    </div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">01</span>
+    <div class="svc-title-new">M-Pesa Integration</div>
+    <div class="svc-desc-new">Add M-Pesa payments to your website so customers can pay directly from their phones. Integrated into your e-commerce store or business site with transaction records and confirmation flows.</div>
+    <div class="svc-tags-new"><span class="stag">Daraja API</span><span class="stag">M-Pesa</span><span class="stag">Supabase</span><span class="stag">Node.js</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad%2C%20I%20need%20M-Pesa%20integration%20on%20my%20website." class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- E-Commerce -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="ecom-mock">
+    <div class="ecom-card"><div class="ecom-img"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.5 20 7v10l-8 4.5L4 17V7l8-4.5z"/><circle cx="12" cy="12" r="3.2"/></svg></div><div class="ecom-bar"></div><div style="display:flex;gap:1.5px;margin-bottom:3px"><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg></div><div class="ecom-price">KSH 450</div><div class="ecom-add" style="display:flex;align-items:center;justify-content:center;gap:3px">ADD TO CART <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 2h3l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div></div>
+    <div class="ecom-card"><div class="ecom-img"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8.5h15l-1.6 11.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8L4.5 8.5z"/><path d="M8.5 8.5V6a3.5 3.5 0 0 1 7 0v2.5"/><path d="M4.5 12.5h15"/></svg></div><div class="ecom-bar"></div><div style="display:flex;gap:1.5px;margin-bottom:3px"><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg></div><div class="ecom-price">KSH 280</div><div class="ecom-add" style="display:flex;align-items:center;justify-content:center;gap:3px">ADD TO CART <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 2h3l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div></div>
+    <div class="ecom-card"><div class="ecom-img"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="ecom-bar"></div><div style="display:flex;gap:1.5px;margin-bottom:3px"><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="#E8A020"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg><svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2"><path d="M12 17.3l-6.2 3.7 1.6-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.8 1.6 7z"/></svg></div><div class="ecom-price">KSH 1,200</div><div class="ecom-add" style="display:flex;align-items:center;justify-content:center;gap:3px">ADD TO CART <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 2h3l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div></div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">02</span>
+    <div class="svc-title-new">E-Commerce Website</div>
+    <div class="svc-desc-new">Complete online store with product catalog, M-Pesa checkout, Supabase/Firebase backend and admin dashboard. Built to Jumia/Kilimall standards — fast, mobile-friendly, production-ready.</div>
+    <div class="svc-tags-new"><span class="stag">HTML/CSS/JS</span><span class="stag">Supabase</span><span class="stag">M-Pesa</span><span class="stag">Cloudinary</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad,%20I%20need%20an%20e-commerce%20website" class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- Business Website -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="bizsite-mock">
+    <div class="browser-mock">
+      <div class="browser-bar"><div class="b-dot b-dot-r"></div><div class="b-dot b-dot-y"></div><div class="b-dot b-dot-g"></div><div class="b-url" style="display:flex;align-items:center;gap:3px"><svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>yourbusiness.netlify.app</div></div>
+      <div class="browser-hero"><div class="bh-title">Welcome to Our Business</div><div class="bh-sub">Professional services. Contact us via WhatsApp today.</div><span class="bh-btn" style="display:inline-flex;align-items:center;gap:3px">Get Started <svg width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="#03060F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
+      <div class="browser-body"><div class="bb-col"><div class="bb-bar"></div><div class="bb-bar" style="width:70%"></div><div class="bb-bar" style="width:50%"></div></div><div class="bb-col"><div class="bb-bar"></div><div class="bb-bar" style="width:60%"></div></div></div>
+    </div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">03</span>
+    <div class="svc-title-new">Business Website</div>
+    <div class="svc-desc-new">Professional landing page or multi-page site. Mobile responsive, fast loading, WhatsApp integration. Deployed on Netlify with a custom domain — ready in days, not weeks.</div>
+    <div class="svc-tags-new"><span class="stag">HTML/CSS</span><span class="stag">JavaScript</span><span class="stag">Netlify</span><span class="stag">WhatsApp</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad,%20I%20need%20a%20business%20website" class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- Social Media -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="social-mock">
+    <div class="ig-post"><div class="ig-img" style="background:linear-gradient(135deg,rgba(255,100,150,.2),rgba(150,50,255,.2))"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff9ec1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="5.5" rx="1"/><path d="M10 7.5h4v2h-4z"/><path d="M8.2 9.5h7.6l.9 3.2v7.3a2 2 0 0 1-2 2H9.3a2 2 0 0 1-2-2v-7.3l.9-3.2z"/></svg></div><div class="ig-meta"><div class="ig-bar"></div><div class="ig-bar" style="width:70%"></div><div class="ig-likes">❤ 284 likes</div></div></div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div class="ig-post" style="width:56px"><div class="ig-img" style="height:56px;background:linear-gradient(135deg,rgba(255,200,50,.2),rgba(255,100,50,.2));font-size:14px">🍕</div><div class="ig-meta"><div class="ig-likes" style="display:flex;align-items:center;gap:3px;color:#9db7e8"><svg width="7" height="7" viewBox="0 0 24 24" fill="#ff5f8f"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>156</div></div></div>
+      <div class="ig-post" style="width:56px"><div class="ig-img" style="height:56px;background:linear-gradient(135deg,rgba(50,200,255,.2),rgba(50,100,255,.2))"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5cb8ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9v12h13V9"/><path d="M10 21v-6.5h4V21"/></svg></div><div class="ig-meta"><div class="ig-likes" style="display:flex;align-items:center;gap:3px;color:#9db7e8"><svg width="7" height="7" viewBox="0 0 24 24" fill="#ff5f8f"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>98</div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;font-size:7px;color:rgba(255,255,255,.4)">
+      <div style="background:rgba(255,255,255,.04);border-radius:6px;padding:5px 7px;width:64px">#Nairobi<br>#Kenya<br>#Business</div>
+      <div style="background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.15);border-radius:6px;padding:5px 7px;font-size:7px;color:var(--gold)">20 posts/mo</div>
+    </div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">04</span>
+    <div class="svc-title-new">Social Media Management</div>
+    <div class="svc-desc-new">20 professionally designed posts per month for your Instagram, Facebook and TikTok. AI-assisted graphics, captions, hashtags and scheduling included.</div>
+    <div class="svc-tags-new"><span class="stag">Instagram</span><span class="stag">TikTok</span><span class="stag">Canva AI</span><span class="stag">Strategy</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad,%20I%20need%20social%20media%20management" class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- WhatsApp Bot -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="auto-mock">
+    <div class="flow-diagram">
+      <div class="flow-node active" style="display:inline-flex;align-items:center;gap:5px"><svg width="9" height="9" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283 32 223.1 32c-122 0-222 99.2-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>Customer WhatsApp</div>
+      <div class="flow-arrow"><svg width="8" height="10" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="1" x2="6" y2="13"/><polyline points="2 10 6 14 10 10"/></svg></div>
+      <div class="flow-node" style="display:inline-flex;align-items:center;gap:5px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Bot receives message</div>
+      <div class="flow-arrow"><svg width="8" height="10" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="1" x2="6" y2="13"/><polyline points="2 10 6 14 10 10"/></svg></div>
+      <div class="flow-node active" style="display:inline-flex;align-items:center;gap:5px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7a2 2 0 0 0 1.4 1.4L21 12l-5.7 1.9a2 2 0 0 0-1.4 1.4L12 21l-1.9-5.7a2 2 0 0 0-1.4-1.4L3 12l5.7-1.9a2 2 0 0 0 1.4-1.4L12 3z"/></svg>Claude AI processes</div>
+      <div class="flow-arrow"><svg width="8" height="10" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="1" x2="6" y2="13"/><polyline points="2 10 6 14 10 10"/></svg></div>
+      <div class="flow-node" style="display:inline-flex;align-items:center;gap:5px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>Checks Google Sheets</div>
+      <div class="flow-arrow"><svg width="8" height="10" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="1" x2="6" y2="13"/><polyline points="2 10 6 14 10 10"/></svg></div>
+      <div class="flow-node active" style="display:inline-flex;align-items:center;gap:5px"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Auto-reply sent</div>
+    </div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">05</span>
+    <div class="svc-title-new">WhatsApp Bot</div>
+    <div class="svc-desc-new">AI-powered WhatsApp bot that handles customer queries 24/7. Integrates with Claude AI for natural language understanding and Google Sheets for real-time inventory lookups.</div>
+    <div class="svc-tags-new"><span class="stag">Claude AI</span><span class="stag">Google Sheets</span><span class="stag">Python</span><span class="stag">Automation</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad,%20I%20need%20a%20WhatsApp%20bot" class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- Backend & Database -->
+<div class="svc-new">
+  <div class="svc-vis"><div class="svc-vis-inner"><div class="fb-mock">
+    <div class="db-panel">
+      <div class="db-header"><span class="db-icon"><svg width="11" height="11" viewBox="0 0 24 24"><defs><linearGradient id="boltg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFCA28"/><stop offset="1" stop-color="#FF6F00"/></linearGradient></defs><path d="M13 2 4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="url(#boltg)"/></svg></span><span class="db-title">FIRESTORE DB</span></div>
+      <div class="db-row"><span class="db-key">orders</span><span class="db-val">array</span><span class="db-type">[]</span></div>
+      <div class="db-row"><span class="db-key">payments</span><span class="db-val">map</span><span class="db-type">{}</span></div>
+      <div class="db-row"><span class="db-key">users</span><span class="db-val">collection</span><span class="db-type">→</span></div>
+      <div class="db-row"><span class="db-key">products</span><span class="db-val">subcollection</span><span class="db-type">→</span></div>
+      <div class="db-row" style="border-bottom:none"><span class="db-key">auth</span><span class="db-val">enabled</span><span class="db-type">✓</span></div>
+    </div>
+  </div></div></div>
+  <div class="svc-body">
+    <span class="svc-num-new">06</span>
+    <div class="svc-title-new">Backend & Database</div>
+    <div class="svc-desc-new">Production-grade backend setup with Supabase or Firebase. Authentication, real-time database, storage, and row-level security. Built to scale with your business.</div>
+    <div class="svc-tags-new"><span class="stag">Supabase</span><span class="stag">Firebase</span><span class="stag">Auth</span><span class="stag">RLS</span></div>
+    <a href="https://wa.me/254716356483?text=Hi%20Bildad,%20I%20need%20backend%20setup" class="svc-link">Get a quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec" id="work">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">Selected Work</div>
+      <h2 class="h2">Real work I've<br><em>shipped.</em></h2>
+    </div>
+    <p>Real projects for real Kenyan businesses. Every project below is either live in production or delivered to a paying client. Click the live links — they work.</p>
+  </div>
+
+  <div class="proj-grid reveal">
+
+<!-- MNUC Market (big) -->
+<div class="proj-card big">
+  <div class="proj-vis">
+    <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1787858416/mnucimag_tjcu4a.png" alt="MNUC Market">
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag live">● Live</span>
+      <span class="ptag">HTML/CSS</span>
+      <span class="ptag">Supabase</span>
+      <span class="ptag">M-Pesa</span>
+    </div>
+    <div class="proj-title">MNUC Market</div>
+    <div class="proj-desc">Live campus marketplace connecting KU students. Product listings, M-Pesa checkout, real-time chat, and admin dashboard. 100+ active users. Deployed at mnucmarketplace.me.</div>
+    <a href="https://mnucmarketplace.me" class="proj-link">Visit live site <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+  </div>
+</div>
+
+<!-- DeVote -->
+<div class="proj-card">
+  <div class="proj-vis">
+    <div class="proj-vis-placeholder devote-placeholder">🗳️</div>
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag">React</span>
+      <span class="ptag">Node.js</span>
+      <span class="ptag">Firebase</span>
+    </div>
+    <div class="proj-title">DeVote</div>
+    <div class="proj-desc">Secure online voting platform with real-time results, voter authentication, and audit trails. Built as a group university project — served as Project Manager and lead developer.</div>
+    <a href="#contact" class="proj-link">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- Rukwaro Autospares (new) -->
+<div class="proj-card">
+  <div class="proj-vis">
+    <!-- REPLACE THIS: swap emoji div for: <img src="YOUR_RUKWARO_SCREENSHOT_URL" alt="Rukwaro Autospares Brand"> -->
+    <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1787917723/ChatGPT_Image_Jun_2_2026_01_06_23_AM_hkmokn.png" alt="Rukwaro Autospares Brand">
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag">Canva</span>
+      <span class="ptag">WhatsApp Bot</span>
+      <span class="ptag">Claude AI</span>
+      <span class="ptag">Social Media</span>
+    </div>
+    <div class="proj-title">Rukwaro Autospares — Brand & Bot</div>
+    <div class="proj-desc">Full brand identity for a Nairobi autospares shop — logo, business cards, product catalogues, and animated HTML banners. Managed their social media presence across Instagram and Facebook. Then built and deployed an AI-powered WhatsApp bot that handles customer queries 24/7 and pulls live inventory from Google Sheets.</div>
+    <a href="#contact" class="proj-link">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- MFS Muriru Hardware -->
+<div class="proj-card">
+  <div class="proj-vis">
+    <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1774188346/screenshot_psuqvl.jpg" alt="MFS Muriru Hardware">
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag live">● Live</span>
+      <span class="ptag">HTML/CSS</span>
+      <span class="ptag">JavaScript</span>
+      <span class="ptag">Netlify</span>
+    </div>
+    <div class="proj-title">MFS Muriru Hardware</div>
+    <div class="proj-desc">Professional business website for a hardware store in Muriru. Clean product showcase, contact integration, and mobile-responsive design. Live and serving real customers daily.</div>
+    <a href="https://mfsshardwarestore.netlify.app" class="proj-link">Visit live site <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+  </div>
+</div>
+
+<!-- Forex Analysis Bot -->
+<div class="proj-card">
+  <div class="proj-vis">
+   <img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1787921718/fores_ac3dwk.png" alt="Forex Analysis Bot">
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag">Python</span>
+      <span class="ptag">API</span>
+      <span class="ptag">Automation</span>
+      <span class="ptag">AI</span>
+    </div>
+    <div class="proj-title">Forex Analysis Bot</div>
+    <div class="proj-desc">Automated forex signal analysis bot built in Python. Pulls live market data, applies technical indicators, and generates buy/sell signals. A personal tool built to explore algorithmic trading and AI-assisted financial analysis — proof that automation skills go beyond client work.</div>
+    <a href="#contact" class="proj-link">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>
+
+<!-- WhatsApp Bot -->
+<div class="proj-card">
+  <div class="proj-vis">
+    <!-- REPLACE THIS: swap emoji div for: <img src="YOUR_BOT_SCREENSHOT_URL" alt="WhatsApp Bot in action"> -->
+<img src="https://res.cloudinary.com/dbeskfsqc/image/upload/v1787920520/bot_pbhvyy.png" alt="WhatsApp Bot">
+    <div class="proj-overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-tags-new">
+      <span class="ptag">Python</span>
+      <span class="ptag">Claude AI</span>
+      <span class="ptag">Google Sheets</span>
+      <span class="ptag">Automation</span>
+    </div>
+    <div class="proj-title">WhatsApp Customer Bot</div>
+    <div class="proj-desc">AI-powered WhatsApp bot for businesses. Handles customer queries, product lookups, and order tracking. Integrated with Google Sheets for inventory management and Claude AI for natural language processing.</div>
+    <a href="#contact" class="proj-link">Learn more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</div>  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec sec-alt" id="process">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">How I Work</div>
+      <h2 class="h2">My process,<br><em>start to finish.</em></h2>
+    </div>
+    <p>Every project follows a clear four-step process. From first conversation to final deployment, I keep you in the loop and deliver on time.</p>
+  </div>
+  <div class="process-grid reveal">
+    <div class="proc-card">
+      <div class="proc-num">01</div>
+      <div class="proc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div class="proc-title">Discovery</div>
+      <div class="proc-desc">I listen to your business goals, target users, and what you need. No jargon — just clear conversation so I understand exactly what to build.</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">02</div>
+      <div class="proc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg></div>
+      <div class="proc-title">Design</div>
+      <div class="proc-desc">Wireframes, mockups, and brand assets tailored to your business. You see exactly what you're getting before I write a single line of code.</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">03</div>
+      <div class="proc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="proc-title">Development</div>
+      <div class="proc-desc">Clean, production-ready code built for the Kenyan market. You get progress updates every step of the way — no disappearing acts.</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-num">04</div>
+      <div class="proc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div class="proc-title">Delivery</div>
+      <div class="proc-desc">Deployment, testing, and ongoing support. You get a working product, not just code. I stay available after launch — same WhatsApp, same response time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="sec" id="tools">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">My Stack</div>
+      <h2 class="h2">Tools I use<br><em>every day.</em></h2>
+    </div>
+    <p>These aren't buzzwords — they're the tools I actually use to ship real projects for real Kenyan businesses. From websites to AI automation, this is my daily toolkit.</p>
+  </div>
+  <div class="tools-grid reveal">
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="tool-name">JavaScript</div>
+      <div class="tool-type">Language</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-4a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-3"/></svg></div>
+      <div class="tool-name">Python</div>
+      <div class="tool-type">Language</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+      <div class="tool-name">Node.js</div>
+      <div class="tool-type">Runtime</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="tool-name">Supabase</div>
+      <div class="tool-type">Backend</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+      <div class="tool-name">Firebase</div>
+      <div class="tool-type">Backend</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+      <div class="tool-name">Cloudinary</div>
+      <div class="tool-type">Media</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="tool-name">Netlify</div>
+      <div class="tool-type">Hosting</div>
+    </div>
+    <div class="tool">
+      <div class="tool-icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.05 0 5.555-2.5 5.555-5.555C21.965 6.012 17.461 2 12 2z"/></svg></div>
+      <div class="tool-name">Canva</div>
+      <div class="tool-type">Design</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec sec-alt" id="why">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">Why Hire Me</div>
+      <h2 class="h2">Why businesses<br><em>hire me.</em></h2>
+    </div>
+    <p>I'm not an agency with hidden costs. I'm not a freelancer who disappears after payment. I'm a developer who stays available, communicates clearly, and ships things that actually work for Kenyan businesses.</p>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-card">
+      <div class="why-n">01</div>
+      <div class="why-title">I Understand the Kenyan Market</div>
+      <div class="why-desc">M-Pesa, mobile-first users, slow internet, local business needs — I build for the reality of Kenya, not a Western template. Your customers will actually use what I build.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-n">02</div>
+      <div class="why-title">Real Projects, Real Results</div>
+      <div class="why-desc">MNUC Market is live with 100+ active users. Rukwaro Autospares has a working WhatsApp bot and brand identity. MFS Muriru Hardware has a live website. These aren't demos — they're shipped.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-n">03</div>
+      <div class="why-title">You Talk Directly to Me</div>
+      <div class="why-desc">No account managers, no middlemen, no "I'll ask the developer." You WhatsApp me directly. I reply fast, I update you throughout, and I deliver what I promise.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-n">04</div>
+      <div class="why-title">CS Foundation + Street Experience</div>
+      <div class="why-desc">Three years of Computer Science at Kenyatta University gave me the theory. Two years of client work gave me the pressure. You get someone who knows why things work, not just how to copy them.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="sec-intro reveal">
+    <div>
+      <div class="label">Get In Touch</div>
+      <h2 class="h2">Let's build<br><em>something.</em></h2>
+    </div>
+    <p>Have a project in mind? WhatsApp me for the fastest response. I reply within 24 hours, usually much sooner. Nairobi-based, available for remote projects worldwide.</p>
+  </div>
+  <div class="contact-wrap reveal">
+    <div class="contact-left">
+      <p>Whether you need a business website, an e-commerce platform with M-Pesa, a WhatsApp bot, or social media management — I can help. Send me a message and I'll get back to you with a custom quote within 24 hours.</p>
+      <div class="contact-methods">
+        <a href="mailto:billyelcie7@gmail.com" class="cm">
+          <div class="cm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <span>billyelcie7@gmail.com</span>
+        </a>
+        <a href="tel:+254716356483" class="cm">
+          <div class="cm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <span>+254 716 356 483</span>
+        </a>
+        <a href="https://wa.me/254716356483" class="cm">
+          <div class="cm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <span>WhatsApp: Chat now</span>
+        </a>
+        <a href="#" class="cm">
+          <div class="cm-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span>Nairobi, Kenya · Remote worldwide</span>
+        </a>
+      </div>
+    </div>
+    <div class="plat-panel">
+      <h3>Find me on</h3>
+      <a href="https://wa.me/254716356483" class="plat-item">
+        <div class="plat-l">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <div>
+            <div class="plat-name">WhatsApp Business</div>
+            <div class="plat-sub">Direct chat · Fastest response</div>
+          </div>
+        </div>
+        <span class="plat-arr">↗</span>
+      </a>
+      <a href="mailto:billyelcie7@gmail.com" class="plat-item">
+        <div class="plat-l">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <div class="plat-name">Email</div>
+            <div class="plat-sub">billyelcie7@gmail.com</div>
+          </div>
+        </div>
+        <span class="plat-arr">↗</span>
+      </a>
+      <a href="https://bildadmwangi.tech" class="plat-item">
+        <div class="plat-l">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div>
+            <div class="plat-name">Portfolio Website</div>
+            <div class="plat-sub">bildadmwangi.tech</div>
+          </div>
+        </div>
+        <span class="plat-arr">↗</span>
+      </a>
+      <a href="https://wa.me/254716356483" class="plat-item">
+        <div class="plat-l">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <div class="plat-name">Phone Call</div>
+            <div class="plat-sub">+254 716 356 483</div>
+          </div>
+        </div>
+        <span class="plat-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to build?</h2>
+  <p>Send me your project details on WhatsApp. You'll get a custom quote within 24 hours — usually much sooner.</p>
+  <a href="https://wa.me/254716356483?text=Hi%20Bildad%2C%20I%20found%20your%20portfolio%20and%20I%27d%20like%20to%20discuss%20a%20project%20with%20you." class="btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Start a project</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bildad Mwangi — <a href="https://bildadmwangi.tech">bildadmwangi.tech</a> · Nairobi, Kenya · Founding <span style="color:var(--gold);font-weight:600">Vector One</span></p>
+  <div class="foot-soc">
+    <a href="https://wa.me/254716356483"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+    <a href="mailto:billyelcie7@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    <a href="https://bildadmwangi.tech"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cur');
+const curT = document.getElementById('curT');
+let mx = 0, my = 0, tx = 0, ty = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top = my + 'px';
+});
+
+function animateTrail() {
+  tx += (mx - tx) * 0.15;
+  ty += (my - ty) * 0.15;
+  curT.style.left = tx + 'px';
+  curT.style.top = ty + 'px';
+  requestAnimationFrame(animateTrail);
+}
+animateTrail();
+
+// CURSOR HOVER
+document.querySelectorAll('a, button, .svc-new, .proj-card, .tool, .why-card, .proc-card, .hf, .stat-box, .now-item, .plat-item, .cm').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('big'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// MOBILE NAV
+function toggleMob() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('mobileNav').classList.remove('open');
+}
+
+// SCROLL REVEAL
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      // Skill bars
+      e.target.querySelectorAll('.sk-fill').forEach(f => {
+        const w = f.dataset.w;
+        f.style.transform = 'scaleX(' + (w / 100) + ')';
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// COUNTER ANIMATION
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const c = e.target;
+      const target = +c.dataset.target;
+      let current = 0;
+      const inc = Math.max(1, target / 30);
+      const timer = setInterval(() => {
+        current += inc;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        c.textContent = Math.floor(current) + '+';
+      }, 30);
+      counterObs.unobserve(c);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(c => counterObs.observe(c));
+
+// HAMBURGER CLICK OUTSIDE CLOSE
+document.addEventListener('click', (e) => {
+  const mobNav = document.getElementById('mobileNav');
+  const ham = document.getElementById('ham');
+  if (mobNav.classList.contains('open') && !mobNav.contains(e.target) && !ham.contains(e.target)) {
+    mobNav.classList.remove('open');
+  }
+});
+
+// LIGHTBOX
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Make all proj-vis images clickable
+document.querySelectorAll('.proj-vis img').forEach(img => {
+  img.addEventListener('click', () => {
+    const title = img.closest('.proj-card')?.querySelector('.proj-title')?.textContent || '';
+    openLightbox(img.src, title);
+  });
+});
+</script>
+</body>
+</html>
+    
+     
